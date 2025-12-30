@@ -13,7 +13,7 @@ const Layout = ({ children }: PropsWithChildren) => {
       <footer className="border-t backdrop-blur py-12 supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 text-center text-gray-400">
           {" "}
-          hey there
+          Weather App by Maksim Dudaryonak<sup>©</sup> 2026 | Powered by OpenWeather
         </div>
       </footer>
     </div>
