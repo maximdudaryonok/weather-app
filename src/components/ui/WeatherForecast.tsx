@@ -49,7 +49,7 @@ const WeatherForecast = ({ data }: WeatherForecastProps) => {
         <CardTitle>5-Days Forecast</CardTitle>
       </CardHeader>
       <CardContent>
-        <div>
+        <div className="flex flex-col gap-3">
           {nextDays.map((day) => {
             return (
               <div

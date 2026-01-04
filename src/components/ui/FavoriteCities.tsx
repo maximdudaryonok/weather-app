@@ -1,11 +1,14 @@
 import { useFavorite } from "@/hooks/useFavorite";
 import { useWeatherQuery } from "@/hooks/useWeather";
-// import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./button";
 import { Loader2, X } from "lucide-react";
 import { toast } from "sonner";
-import { ScrollArea } from "./scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import {
+  ScrollAreaScrollbar,
+  ScrollAreaThumb,
+} from "@radix-ui/react-scroll-area";
 
 interface FavoriteCityTableProps {
   id: string;
@@ -23,18 +26,26 @@ const FavoriteCities = () => {
   return (
     <>
       <h1 className="text-xl font-bold tracking-tight">Favorites</h1>
-      <ScrollArea className="w-full pb-4">
-        <div className="flex gap-4">
+      <ScrollArea className="w-full pb-4 whitespace-nowrap">
+        <div className="flex gap-4 w-max ">
           {favorites.map((city) => {
             return (
-              <FavoriteCityTable
-                key={city.id}
-                {...city}
-                onRemove={() => removeFavorite.mutate(city.id)}
-              />
+              <div className="overflow-hidden">
+                <FavoriteCityTable
+                  key={city.id}
+                  {...city}
+                  onRemove={() => removeFavorite.mutate(city.id)}
+                />
+              </div>
             );
           })}
         </div>
+        <ScrollAreaScrollbar
+          orientation="horizontal"
+          className="flex h-0.5 touch-none select-none transition-colors"
+        >
+          <ScrollAreaThumb className="relative flex-1 rounded-full bg-muted-foreground/50 hover:bg-muted-foreground/70" />
+        </ScrollAreaScrollbar>
       </ScrollArea>
     </>
   );
@@ -55,7 +66,7 @@ function FavoriteCityTable({
       onClick={() => navigate(`/city/${name}?lat=${lat}&lon=${lon}`)}
       role="button"
       tabIndex={0}
-      className="relative flex min-w-[250px] cursor-pointer items-center gap-3 rounded-lg border bg-card p-4 pr-8 shadow-sm transition-all hover:shadow-md"
+      className="relative flex min-w-62.5 cursor-pointer items-center gap-3 rounded-lg border bg-card p-4 pr-4 shadow-lg transition-all hover:shadow-md"
     >
       <Button
         variant="ghost"

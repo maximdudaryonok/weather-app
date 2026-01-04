@@ -23,7 +23,7 @@ const FavoriteButton = ({ data }: FavoriteButtonProps) => {
         lon: data.coord.lon,
         country: data.sys.country,
       });
-      toast.success(`Added ${data.name} from the Favorites`);
+      toast.success(`Added ${data.name} to the Favorites`);
     }
   };
   return (

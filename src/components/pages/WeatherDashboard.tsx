@@ -103,8 +103,8 @@ const WeatherDashboard = () => {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold tracking-tight">My Location</h1>
         <Button
-          variant={"outline"}
-          size={"icon"}
+          variant="outline"
+          size="icon"
           onClick={handleRefresh}
           disabled={weatherQuery.isFetching || forecastQuery.isFetching}
         >
