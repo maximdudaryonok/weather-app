@@ -39,12 +39,10 @@ const CityPage = () => {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        {/* Favorite City  */}
         <h1 className="text-3xl font-bold tracking-tight">
           {param.cityName},{weatherQuery.data.sys.country}
         </h1>
         <div>
-          {/* Favorite */}
           <FavoriteButton
             data={{ ...weatherQuery.data, name: param.cityName }}
           />
@@ -53,15 +51,12 @@ const CityPage = () => {
 
       <div>
         <div className="flex flex-col gap-4">
-          {/* current weather and hourly temp data */}
           <CurrentWeather data={weatherQuery.data} />
           <HourlyTemperature data={forecastQuery.data} />
         </div>
       </div>
       <div className="grid gap-6 md:grid-cols-2 items-start">
-        {/* details*/}
         <WeatherDetails data={weatherQuery.data} />
-        {/* forecast */}
         <WeatherForecast data={forecastQuery.data} />
       </div>
     </div>

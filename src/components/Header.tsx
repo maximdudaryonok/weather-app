@@ -32,9 +32,7 @@ const Header = () => {
         </Link>
 
         <div className="flex items-center gap-4">
-          {/* search */}
           <CitySearch />
-          {/* theme toggles */}
           <div
             onClick={() => setTheme(isDark ? "light" : "dark")}
             className={`flex items-center justify-center cursor-pointer tansition-transform duration-500 ${

@@ -17,7 +17,6 @@ import { format } from "date-fns";
 import { useFavorite } from "@/hooks/useFavorite";
 
 const CitySearch = () => {
-  //   return export function CommandMenu() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
@@ -27,7 +26,6 @@ const CitySearch = () => {
   const handleSelect = (cityData: string) => {
     const [lat, lon, name, country] = cityData.split("|");
 
-    // add to search histpry
     addToHistory.mutate({
       query,
       name,
@@ -62,9 +60,6 @@ const CitySearch = () => {
           {query.length > 2 && !isLoading && (
             <CommandEmpty>No Cities found.</CommandEmpty>
           )}
-          {/* <CommandGroup heading="Favorites">
-            <CommandItem>Calendar</CommandItem>
-          </CommandGroup> */}
 
           {favorites.length > 0 && (
             <CommandGroup heading="Favorites">
@@ -137,7 +132,6 @@ const CitySearch = () => {
                     </CommandItem>
                   );
                 })}
-                {/* <CommandItem>Calendar</CommandItem> */}
               </CommandGroup>
             </>
           )}

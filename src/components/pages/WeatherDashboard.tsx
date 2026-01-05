@@ -21,18 +21,13 @@ const WeatherDashboard = () => {
     isLoading: locationLoading,
   } = useGeoLocation();
 
-  // console.log(coordinates);
-
   const weatherQuery = useWeatherQuery(coordinates);
   const forecastQuery = useForecastQuery(coordinates);
   const locationQuery = useReverseGeocodeQuery(coordinates);
-  // console.log(locationQuery);
 
   const handleRefresh = () => {
     getLocation();
     if (coordinates) {
-      // reload weather
-
       weatherQuery.refetch();
       forecastQuery.refetch();
       locationQuery.refetch();
@@ -117,7 +112,6 @@ const WeatherDashboard = () => {
       </div>
       <div>
         <div className="flex flex-col lg:flex-row gap-4">
-          {/* current weather and hourly temp data */}
           <CurrentWeather
             data={weatherQuery.data}
             locationName={locationName}
@@ -126,9 +120,7 @@ const WeatherDashboard = () => {
         </div>
       </div>
       <div className="grid gap-6 md:grid-cols-2 items-start">
-        {/* details*/}
         <WeatherDetails data={weatherQuery.data} />
-        {/* forecast */}
         <WeatherForecast data={forecastQuery.data} />
       </div>
     </div>

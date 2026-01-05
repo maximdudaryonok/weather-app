@@ -11,7 +11,7 @@ const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
   const ChartData = data.list.slice(0, 8).map((item) => ({
     time: format(new Date(item.dt * 1000), "ha"),
     temp: Math.round(item.main.temp),
-    fleels_like: Math.round(item.main.feels_like),
+    feels_like: Math.round(item.main.feels_like),
   }));
   return (
     <Card className="flex-1">
@@ -36,7 +36,6 @@ const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
                 axisLine={false}
                 tickFormatter={(value) => `${value}°`}
               />
-              {/* tooltip */}
 
               <Tooltip
                 content={({ active, payload }) => {

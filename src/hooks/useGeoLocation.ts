@@ -37,32 +37,90 @@ export function useGeoLocation() {
         });
       },
       (error) => {
-        let errorMessage: string;
+      
+        if (error.code === error.TIMEOUT) {
+          const handleWatchSuccess = (position: GeolocationPosition) => {
+            setLocationData({
+              coordinates: {
+                lat: position.coords.latitude,
+                lon: position.coords.longitude,
+              },
+              error: null,
+              isLoading: false,
+            });
+          };
 
-        switch (error.code) {
-          case error.PERMISSION_DENIED:
-            errorMessage =
-              "Location permission denied. please enable location access.";
-            break;
-          case error.POSITION_UNAVAILABLE:
-            errorMessage = "Location info is unavailable.";
-            break;
-          case error.TIMEOUT:
-            errorMessage = "Location request timed out.";
-            break;
-          default:
-            errorMessage = "An unknown error occured";
+          const handleWatchError = (watchError: GeolocationPositionError) => {
+            let errorMessage: string;
+
+            switch (watchError.code) {
+              case watchError.PERMISSION_DENIED:
+                errorMessage =
+                  "Location permission denied. Please enable location access.";
+                break;
+              case watchError.POSITION_UNAVAILABLE:
+                errorMessage = "Location info is unavailable.";
+                break;
+              case watchError.TIMEOUT:
+                errorMessage = "Location request timed out. Please try again.";
+                break;
+              default:
+                errorMessage = "An unknown error occurred";
+            }
+
+            setLocationData({
+              coordinates: null,
+              error: errorMessage,
+              isLoading: false,
+            });
+          };
+
+          const watchId = navigator.geolocation.watchPosition(
+            handleWatchSuccess,
+            handleWatchError,
+            {
+              enableHighAccuracy: false, 
+              timeout: 10000,
+              maximumAge: 600000,
+            }
+          );
+
+          setTimeout(() => {
+            navigator.geolocation.clearWatch(watchId);
+            if (locationData.isLoading) {
+              setLocationData({
+                coordinates: null,
+                error: "Location request timed out. Please check your location settings and try again.",
+                isLoading: false,
+              });
+            }
+          }, 10000);
+        } else {
+          
+          let errorMessage: string;
+
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              errorMessage =
+                "Location permission denied. Please enable location access.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorMessage = "Location info is unavailable.";
+              break;
+            default:
+              errorMessage = "An unknown error occurred";
+          }
+
+          setLocationData({
+            coordinates: null,
+            error: errorMessage,
+            isLoading: false,
+          });
         }
-
-        setLocationData({
-          coordinates: null,
-          error: errorMessage,
-          isLoading: false,
-        });
       },
       {
         enableHighAccuracy: true,
-        timeout: 5000,
+        timeout: 15000,
         maximumAge: 0,
       }
     );
