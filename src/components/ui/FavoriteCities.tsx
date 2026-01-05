@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "./button";
 import { Loader2, X } from "lucide-react";
 import { toast } from "sonner";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   ScrollAreaScrollbar,
   ScrollAreaThumb,

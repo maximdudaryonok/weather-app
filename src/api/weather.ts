@@ -16,6 +16,7 @@ class WeatherAPI {
     return `${endpoint}?${searchParams.toString()}`;
   }
 
+  //   we dont kneo the type of the fetch, we are going to take the dynamic code
 
   private async fetchData<T>(url: string): Promise<T> {
     const response = await fetch(url);
